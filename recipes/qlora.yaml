@@ -22,7 +22,7 @@ training:
 
 dataset:
   path: "yahma/alpaca-cleaned"
-  split: "train[:500]"
+  split: "train"
   template: "alpaca"
 
 quantization:
