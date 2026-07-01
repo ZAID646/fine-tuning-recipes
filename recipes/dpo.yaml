@@ -1,5 +1,5 @@
 model:
-  name: "microsoft/phi-2"
+  name: "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
   torch_dtype: "bfloat16"
 
 lora:
@@ -10,7 +10,7 @@ lora:
 
 training:
   output_dir: "./outputs/dpo"
-  num_train_epochs: 2
+  num_train_epochs: 1
   per_device_train_batch_size: 2
   gradient_accumulation_steps: 4
   learning_rate: 5e-5
@@ -22,7 +22,7 @@ training:
 
 dataset:
   path: "trl-lib/ultrafeedback_binarized"
-  split: "train[:500]"
+  split: "train[:200]"
   template: "dpo"
 
 quantization:
