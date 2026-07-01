@@ -1,0 +1,29 @@
+model:
+  name: "microsoft/phi-2"
+  torch_dtype: "bfloat16"
+  attn_implementation: "flash_attention_2"
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+training:
+  output_dir: "./outputs/lora"
+  num_train_epochs: 3
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 2e-4
+  warmup_steps: 100
+  logging_steps: 10
+  save_steps: 200
+  max_seq_length: 512
+  packing: true
+
+dataset:
+  path: "yahma/alpaca-cleaned"
+  split: "train[:1000]"
+  template: "alpaca"
+
+quantization: null

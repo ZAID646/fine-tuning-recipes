@@ -1,0 +1,32 @@
+model:
+  name: "microsoft/phi-2"
+  torch_dtype: "bfloat16"
+
+lora:
+  r: 8
+  alpha: 16
+  dropout: 0.1
+  target_modules: ["q_proj", "v_proj"]
+
+training:
+  output_dir: "./outputs/dpo"
+  num_train_epochs: 2
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 4
+  learning_rate: 5e-5
+  warmup_steps: 50
+  logging_steps: 10
+  save_steps: 200
+  max_length: 512
+  max_prompt_length: 256
+
+dataset:
+  path: "trl-lib/ultrafeedback_binarized"
+  split: "train[:500]"
+  template: "dpo"
+
+quantization:
+  load_in_4bit: true
+  bnb_4bit_compute_dtype: "bfloat16"
+  bnb_4bit_use_double_quant: true
+  bnb_4bit_quant_type: "nf4"
